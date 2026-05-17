@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './index.css'; // <-- ESSA É A LINHA MÁGICA QUE COLOQUEI PARA ATIVAR O DESIGN ESCURO!
 
 // ==========================================
 // 1. MATRIZ DE PREÇOS DA GRÁFICA
@@ -163,6 +164,7 @@ export default function App() {
             <h2 className="text-xs uppercase tracking-wider text-zinc-400 font-bold mb-4">Substrato / Papel de Linha</h2>
             <div className="space-y-3">
               <button 
+                type="button"
                 onClick={() => setPapelSelecionado("couche_150g")}
                 className={`w-full text-left p-4 rounded-xl border transition ${papelSelecionado === 'couche_150g' ? 'border-emerald-500 bg-emerald-500/5' : 'border-zinc-800 bg-zinc-950 hover:border-zinc-700'}`}
               >
@@ -176,6 +178,7 @@ export default function App() {
               </button>
 
               <button 
+                type="button"
                 onClick={() => setPapelSelecionado("lona_front_440g")}
                 className={`w-full text-left p-4 rounded-xl border transition ${papelSelecionado === 'lona_front_440g' ? 'border-emerald-500 bg-emerald-500/5' : 'border-zinc-800 bg-zinc-950 hover:border-zinc-700'}`}
               >
@@ -194,6 +197,7 @@ export default function App() {
             <h2 className="text-xs uppercase tracking-wider text-zinc-400 font-bold mb-4">Entrada de Carga (Cores)</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <button 
+                type="button"
                 onClick={() => setCorSelecionada("4x4")}
                 className={`p-4 rounded-xl border text-left transition ${corSelecionada === '4x4' ? 'border-emerald-500 bg-emerald-500/5' : 'border-zinc-800 bg-zinc-950 hover:border-zinc-700'}`}
               >
@@ -201,6 +205,7 @@ export default function App() {
                 <span className="text-xs text-zinc-500">Cromia Frente e Verso</span>
               </button>
               <button 
+                type="button"
                 onClick={() => setCorSelecionada("4x0")}
                 className={`p-4 rounded-xl border text-left transition ${corSelecionada === '4x0' ? 'border-emerald-500 bg-emerald-500/5' : 'border-zinc-800 bg-zinc-950 hover:border-zinc-700'}`}
               >
@@ -214,18 +219,21 @@ export default function App() {
             <h2 className="text-xs uppercase tracking-wider text-zinc-400 font-bold mb-4">Processos de Acabamento</h2>
             <div className="flex flex-wrap gap-3">
               <button 
+                type="button"
                 onClick={() => alternarAcabamento("verniz_total")}
                 className={`px-5 py-3 rounded-xl border font-medium transition ${acabamentosSelecionados.includes("verniz_total") ? "bg-emerald-500 border-emerald-500 text-zinc-950 font-bold" : "border-zinc-800 bg-zinc-950 text-zinc-300 hover:border-zinc-700"}`}
               >
                 + Verniz UV Total
               </button>
               <button 
+                type="button"
                 onClick={() => alternarAcabamento("dobra_simples")}
                 className={`px-5 py-3 rounded-xl border font-medium transition ${acabamentosSelecionados.includes("dobra_simples") ? "bg-emerald-500 border-emerald-500 text-zinc-950 font-bold" : "border-zinc-800 bg-zinc-950 text-zinc-300 hover:border-zinc-700"}`}
               >
                 + Dobra Mecânica
               </button>
               <button 
+                type="button"
                 onClick={() => alternarAcabamento("refile_simples")}
                 className={`px-5 py-3 rounded-xl border font-medium transition ${acabamentosSelecionados.includes("refile_simples") ? "bg-emerald-500 border-emerald-500 text-zinc-950 font-bold" : "border-zinc-800 bg-zinc-950 text-zinc-300 hover:border-zinc-700"}`}
               >
@@ -289,7 +297,7 @@ export default function App() {
               {pecasPorFolha > 0 ? formatarMoeda(precoDeVenda) : "Formatos Incompatíveis"}
             </h2>
           </div>
-          <button className="bg-emerald-500 text-zinc-950 font-bold px-8 h-14 rounded-xl hover:bg-emerald-400 transition shadow-lg shadow-emerald-500/20 uppercase tracking-wider text-sm">
+          <button type="button" className="bg-emerald-500 text-zinc-950 font-bold px-8 h-14 rounded-xl hover:bg-emerald-400 transition shadow-lg shadow-emerald-500/20 uppercase tracking-wider text-sm">
             Salvar & Emitir OS
           </button>
         </div>
