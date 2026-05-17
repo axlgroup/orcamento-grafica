@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './index.css'; // <-- ESSA É A LINHA MÁGICA QUE COLOQUEI PARA ATIVAR O DESIGN ESCURO!
 
 // ==========================================
 // 1. MATRIZ DE PREÇOS DA GRÁFICA
@@ -35,7 +34,7 @@ const tabelaPrecos = {
 // 2. ENGENHARIA DE APROVEITAMENTO DE FOLHA
 // ==========================================
 function calcularAproveitamento(larguraFolha, alturaFolha, larguraPeca, alturaPeca) {
-  if (!larguraPeca || !alturaPeca) return 0;
+  if (!larguraPeca || !alturaPeca || larguraPeca <= 0 || alturaPeca <= 0) return 0;
   const total1 = Math.floor(larguraFolha / larguraPeca) * Math.floor(alturaFolha / alturaPeca);
   const total2 = Math.floor(larguraFolha / alturaPeca) * Math.floor(alturaFolha / larguraPeca);
   return Math.max(total1, total2);
@@ -43,7 +42,7 @@ function calcularAproveitamento(larguraFolha, alturaFolha, larguraPeca, alturaPe
 
 export default function App() {
   // ==========================================
-  // 3. ESTADOS REATIVOS (O NOVO CÉREBRO)
+  // 3. ESTADOS REATIVOS
   // ==========================================
   const [quantidade, setQuantidade] = useState(1000);
   const [larguraProduto, setLarguraProduto] = useState(90);
@@ -59,8 +58,8 @@ export default function App() {
   // ==========================================
   // 4. MOTOR DE CÁLCULO AUTOMÁTICO
   // ==========================================
-  const papel = tabelaPrecos.papeis[papelSelecionado];
-  const cor = tabelaPrecos.impressao_cliques[corSelecionada];
+  const papel = tabelaPrecos.papeis[papelSelecionado] || tabelaPrecos.papeis.couche_150g;
+  const cor = tabelaPrecos.impressao_cliques[corSelecionada] || tabelaPrecos.impressao_cliques["4x4"];
   const maquina = tabelaPrecos.maquinas[maquinaSelecionada];
 
   const pecasPorFolha = calcularAproveitamento(
@@ -125,7 +124,7 @@ export default function App() {
         <div className="lg:col-span-2 space-y-8">
           
           <section className="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl">
-            <h1 className="text-2xl font-bold tracking-tight text-white mb-2">Orçamento de Produção</h1>
+            <h1 className="text-2xl font-bold tracking-tight text-white mb-2">Orçamento de Production</h1>
             <p className="text-sm text-zinc-400 mb-6">Insira as dimensões finais do produto e tiragem desejada.</p>
 
             <div className="mb-6">
@@ -144,7 +143,7 @@ export default function App() {
                 <input 
                   type="number" 
                   value={larguraProduto} 
-                  onChange={(e) => setLarguraProduto(Number(e.target.value))}
+                  onChange={(e) => setLarguraProduto(Math.max(0, Number(e.target.value)))}
                   className="w-full h-14 rounded-xl border border-zinc-700 bg-zinc-950 text-white px-4 text-xl font-mono focus:border-emerald-500 focus:outline-none" 
                 />
               </div>
@@ -153,7 +152,7 @@ export default function App() {
                 <input 
                   type="number" 
                   value={alturaProduto} 
-                  onChange={(e) => setAlturaProduto(Number(e.target.value))}
+                  onChange={(e) => setAlturaProduto(Math.max(0, Number(e.target.value)))}
                   className="w-full h-14 rounded-xl border border-zinc-700 bg-zinc-950 text-white px-4 text-xl font-mono focus:border-emerald-500 focus:outline-none" 
                 />
               </div>
